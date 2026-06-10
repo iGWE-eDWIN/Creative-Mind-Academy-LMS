@@ -61,31 +61,43 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const signIn = async (email: string, password: string) => {
     try {
-      const response = await api.post('/auth/login', { email, password });
-      const { token, user: userData } = response.data;
+      const response = await api.post('/login', { email, password });
       
-      await SecureStore.setItemAsync('accessToken', token);
+      // Debug log to see what's coming from backend
+      console.log('Login response:', response.data);
+      
+      // ✅ FIXED: Use accessToken instead of token
+      const { accessToken, refreshToken, user: userData } = response.data;
+      
+      // Store both tokens
+      await SecureStore.setItemAsync('accessToken', accessToken);
+      await SecureStore.setItemAsync('refreshToken', refreshToken);
       await AsyncStorage.setItem('userData', JSON.stringify(userData));
       
-      setUserToken(token);
+      setUserToken(accessToken);
       setUser(userData);
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     } catch (error: any) {
+      console.error('Login error:', error.response?.data || error.message);
       throw new Error(error.response?.data?.message || 'Login failed');
     }
   };
 
   const signUp = async (userData: SignUpData) => {
     try {
-      await api.post('/auth/register', userData);
+      const response = await api.post('/register', userData);
+      console.log('Registration response:', response.data);
     } catch (error: any) {
+      console.error('Registration error:', error.response?.data || error.message);
       throw new Error(error.response?.data?.message || 'Registration failed');
     }
   };
 
   const signOut = async () => {
     try {
+      // Clear both tokens
       await SecureStore.deleteItemAsync('accessToken');
+      await SecureStore.deleteItemAsync('refreshToken');
       await AsyncStorage.removeItem('userData');
       setUserToken(null);
       setUser(null);
@@ -108,7 +120,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const resetPassword = async (email: string) => {
     try {
-      await api.post('/auth/forgot-password', { email });
+      await api.post('/forgot-password', { email });
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Password reset failed');
     }
@@ -116,7 +128,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const verifyEmail = async (token: string) => {
     try {
-      await api.post('/auth/verify-email', { token });
+      await api.post('/verify-email', { token });
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Email verification failed');
     }
