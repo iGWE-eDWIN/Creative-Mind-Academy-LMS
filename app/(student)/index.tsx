@@ -642,6 +642,7 @@
 // });
 
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
   FlatList,
@@ -712,16 +713,23 @@ function DashboardHeader({ userName, profilePicture }: { userName: string; profi
     <View style={styles.header}>
       <View style={styles.headerContent}>
         <View style={styles.headerLeft}>
-          <Image
+          <TouchableOpacity 
+          onPress={() => router.push('/(student)/profile')}
+          >
+            <Image
             source={{ uri: profilePicture || 'https://via.placeholder.com/52' }}
             style={styles.profileImage}
           />
+          </TouchableOpacity>
           <View style={styles.headerTextGroup}>
             <Text style={styles.welcomeText}>Welcome back,</Text>
             <Text style={styles.userName}>{userName.split(' ')[0] || 'Student'}</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.bellButton}>
+        <TouchableOpacity 
+        style={styles.bellButton}
+        onPress={() => router.push('/(student)/notifications')}
+        >
           <Ionicons name="notifications-outline" size={22} color="#FFFFFF" />
         </TouchableOpacity>
       </View>
@@ -929,23 +937,23 @@ export default function StudentDashboard() {
   }, []);
 
   const handleCoursePress = (courseId: string) => {
-    // router.push(`/(student)/course-player/${courseId}`);
-    console.log('Navigate to course:', courseId);
+    router.push(`/(student)/course-player/${courseId}`);
+    // console.log('Navigate to course:', courseId);
   };
 
   const handleViewAllCourses = () => {
-    // router.push('/(student)/my-courses');
-    console.log('Navigate to my courses');
+    router.push('/(student)/my-courses');
+    // console.log('Navigate to my courses');
   };
 
   const handleQuickAction = (route: string) => {
-    // router.push(route);
+    router.push(route as any);
     console.log('Navigate to:', route);
   };
 
   const handleTopUp = () => {
-    // router.push('/(student)/wallet');
-    console.log('Navigate to wallet');
+    router.push('/(student)/wallet');
+    // console.log('Navigate to wallet');
   };
 
   const renderSection = ({ item }: { item: DashboardSection }) => {
