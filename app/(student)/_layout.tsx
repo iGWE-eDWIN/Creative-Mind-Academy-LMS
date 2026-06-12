@@ -1,7 +1,8 @@
 
 import { Ionicons } from '@expo/vector-icons';
-import { Tabs } from 'expo-router';
+import { Tabs, } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
+
 
 function TabIcon({
   name,
@@ -55,6 +56,7 @@ export default function StudentLayout() {
             <TabIcon name="school-outline" color={color} size={size} focused={focused} />
           ),
           headerTitle: 'Browse Courses',
+          // headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -65,6 +67,7 @@ export default function StudentLayout() {
             <TabIcon name="book-outline" color={color} size={size} focused={focused} />
           ),
           headerTitle: 'My Courses',
+          
         }}
       />
       <Tabs.Screen
@@ -101,47 +104,47 @@ export default function StudentLayout() {
       {/* Hidden Screens - Not shown in tab bar */}
       <Tabs.Screen
         name="profile"
-        options={{ href: null, headerTitle: 'Profile' }}
+        options={{ href: null, headerTitle: 'Profile',  headerShown: false, }}
       />
       <Tabs.Screen
         name="course-details/[id]"
-        options={{ href: null, headerTitle: 'Course Details' }}
+        options={{ href: null, headerTitle: 'Course Details',headerShown: false, }}
       />
       <Tabs.Screen
         name="course-player/[id]"
-        options={{ href: null, headerTitle: 'Course Player' }}
+        options={{ href: null, headerTitle: 'Course Player', headerShown: false, }}
       />
       <Tabs.Screen
         name="assignments/[id]"
-        options={{ href: null, headerTitle: 'Assignment' }}
+        options={{ href: null, headerTitle: 'Assignment', headerShown: false, }}
       />
       <Tabs.Screen
         name="quizzes/[id]"
-        options={{ href: null, headerTitle: 'Quiz' }}
+        options={{ href: null, headerTitle: 'Quiz', headerShown: false, }}
       />
       <Tabs.Screen
         name="quizzes/result/[id]"
-        options={{ href: null, headerTitle: 'Quiz Result' }}
+        options={{ href: null, headerTitle: 'Quiz Result', headerShown: false, }}
       />
       <Tabs.Screen
         name="certificates"
-        options={{ href: null, headerTitle: 'My Certificates' }}
+        options={{ href: null, headerTitle: 'My Certificates', headerShown: false, }}
       />
       <Tabs.Screen
         name="certificate-view/[id]"
-        options={{ href: null, headerTitle: 'Certificate' }}
+        options={{ href: null, headerTitle: 'Certificate', headerShown: false, }}
       />
       <Tabs.Screen
         name="live-classes"
-        options={{ href: null, headerTitle: 'Live Classes' }}
+        options={{ href: null, headerTitle: 'Live Classes', headerShown: false, }}
       />
       <Tabs.Screen
         name="notifications"
-        options={{ href: null, headerTitle: 'Notifications' }}
+        options={{ href: null, headerTitle: 'Notifications', headerShown: false, }}
       />
       <Tabs.Screen
         name="settings"
-        options={{ href: null, headerTitle: 'Settings' }}
+        options={{ href: null, headerTitle: 'Settings', headerShown: false, }}
       />
     </Tabs>
   );

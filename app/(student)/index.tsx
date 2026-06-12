@@ -643,7 +643,7 @@
 
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   FlatList,
   Image,
@@ -994,6 +994,7 @@ export default function StudentDashboard() {
           <DashboardHeader 
             userName={user?.name || 'Student'} 
             profilePicture={user?.profilePicture}
+          
           />
         }
         style={styles.list}

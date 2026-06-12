@@ -1,18 +1,18 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
-    ActivityIndicator,
-    Alert,
-    Image,
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -21,7 +21,7 @@ export default function LoginScreen() {
   const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { signIn } = useAuth();
+  const { signIn, userRole } = useAuth();
   const router = useRouter();
 
   const handleLogin = async (): Promise<void> => {
@@ -32,10 +32,14 @@ export default function LoginScreen() {
 
     setIsLoading(true);
     try {
-      await signIn(email, password);
+      await signIn(email, password, () => {
+        // The root layout will handle the navigation automatically
+        // based on the auth state
+        console.log('Login successful, navigation will be handled by root layout');
+        // No need to manually navigate - root layout will handle it
+      });
     } catch (error: any) {
       Alert.alert('Login Failed', error.message);
-    } finally {
       setIsLoading(false);
     }
   };
