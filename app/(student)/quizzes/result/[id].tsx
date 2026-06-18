@@ -14,6 +14,7 @@ const { width } = Dimensions.get('window');
 
 export default function QuizResultScreen() {
   const { id, score, total, passed } = useLocalSearchParams();
+  const quizId = Array.isArray(id) ? id[0] : id;
   const scoreNum = parseInt(score as string);
   const totalNum = parseInt(total as string);
   const percentage = (scoreNum / totalNum) * 100;
@@ -112,7 +113,7 @@ export default function QuizResultScreen() {
         onPress={() =>
   router.push({
     pathname: '/(student)/quizzes/[id]',
-    params: { id: id },
+    params: { id: quizId },
   })
 }
           style={{

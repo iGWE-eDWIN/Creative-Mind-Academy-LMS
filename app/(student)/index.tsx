@@ -958,8 +958,8 @@ export default function StudentDashboard() {
 
   const renderSection = ({ item }: { item: DashboardSection }) => {
     switch (item.type) {
-      case 'wallet':
-        return <WalletSection balance={stats.walletBalance} onTopUp={handleTopUp} />;
+      // case 'wallet':
+      //   return <WalletSection balance={stats.walletBalance} onTopUp={handleTopUp} />;
       case 'stats':
         return <StatsSection stats={stats} />;
       case 'quick-actions':

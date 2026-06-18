@@ -1,7 +1,7 @@
 
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs, } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 
 function TabIcon({
@@ -158,9 +158,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderTopWidth: 1,
     borderTopColor: '#E5E7EB',
-    paddingBottom: 8,
+    // paddingBottom: 8,
+     paddingBottom: Platform.OS === 'ios' ? 20 : 8,
     paddingTop: 6,
-    height: 64,
+    // height: 64,
+     height: Platform.OS === 'ios' ? 78 : 64,
   },
   tabBarLabelStyle: {
     fontSize: 11,

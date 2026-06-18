@@ -49,11 +49,11 @@ function RootLayoutNav() {
         switch (userRole) {
           case 'admin':
             console.log('Redirecting admin to admin dashboard');
-            router.replace('/(admin)/index');
+            router.replace('/(admin)');
             break;
           case 'instructor':
             console.log('Redirecting instructor to instructor dashboard');
-            router.replace('/(instructor)/index');
+            router.replace('/(instructor)');
             break;
           case 'student':
             console.log('Redirecting student to student dashboard');
@@ -75,13 +75,13 @@ function RootLayoutNav() {
 
       if (userRole === 'instructor' && !inInstructorGroup) {
         console.log('Instructor trying to access non-instructor area, redirecting to instructor dashboard');
-        router.replace('/(instructor)/index');
+        router.replace('/(instructor)');
         return;
       }
 
       if (userRole === 'admin' && !inAdminGroup) {
         console.log('Admin trying to access non-admin area, redirecting to admin dashboard');
-        router.replace('/(admin)/index');
+        router.replace('/(admin)');
         return;
       }
     }
